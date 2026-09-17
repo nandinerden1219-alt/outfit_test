@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/tsconfig.base.json"],
+    "production": ["default", "!{projectRoot}/**/*.test.{ts,tsx}", "!{projectRoot}/test/**/*", "!{projectRoot}/jest.config.ts"]
+  },
+  "targetDefaults": {
+    "build": { "dependsOn": ["^build"], "inputs": ["production", "^production"], "cache": true, "outputs": ["{projectRoot}/dist", "{projectRoot}/.next", "{projectRoot}/.open-next"] },
+    "build:cf": { "dependsOn": ["^build"], "inputs": ["production", "^production"], "cache": true, "outputs": ["{projectRoot}/.open-next"] },
+    "test": { "inputs": ["default", "^production"], "cache": true },
+    "typecheck": { "inputs": ["default", "^production"], "cache": true },
+    "lint": { "inputs": ["default"], "cache": true },
+    "dev": { "cache": false },
+    "deploy": { "dependsOn": ["build:cf"], "cache": false }
+  },
+  "defaultBase": "master"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "outfit-app",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "nx dev @outfit/web",
+    "api": "nx dev @outfit/api",
+    "build": "nx run-many -t build",
+    "build:cf": "nx run-many -t build:cf",
+    "test": "nx run-many -t test",
+    "typecheck": "nx run-many -t typecheck",
+    "lint": "nx run-many -t lint",
+    "check": "nx run-many -t typecheck lint test",
+    "graph": "nx graph"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "nx": "^21.0.0",
+    "ts-jest": "^29.4.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}

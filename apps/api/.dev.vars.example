@@ -1,0 +1,14 @@
+# Copy to apps/api/.dev.vars for `wrangler dev`. Never commit .dev.vars.
+DEMO_MODE=true
+# Supabase Auth (JWT verification). Asymmetric keys are fetched from SUPABASE_URL's JWKS;
+# legacy HS256 projects need SUPABASE_JWT_SECRET.
+SUPABASE_URL=
+SUPABASE_JWT_SECRET=
+# Signs the time-limited image URLs served by GET /files/...
+FILE_URL_SECRET=change-me-to-a-long-random-string
+# Clothing analysis + outfit naming
+GEMINI_API_KEY=
+# Background removal (BACKGROUND_REMOVAL=removebg)
+REMOVE_BG_API_KEY=
+# Virtual try-on (TRYON_PROVIDER=leffa)
+HF_TOKEN=

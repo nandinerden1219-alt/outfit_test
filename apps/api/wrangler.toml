@@ -1,0 +1,52 @@
+name = "outfit-api"
+main = "src/index.ts"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Non-secret configuration. Secrets (SUPABASE_JWT_SECRET, GEMINI_API_KEY, HF_TOKEN,
+# REMOVE_BG_API_KEY, FILE_URL_SECRET) are set with `wrangler secret put <NAME>`.
+[vars]
+ENV = "development"
+DEMO_MODE = "false"
+CORS_ORIGINS = "http://localhost:3000,http://localhost:3100"
+PUBLIC_BASE_URL = "http://localhost:8000"
+SUPABASE_URL = ""
+SUPABASE_JWT_AUDIENCE = "authenticated"
+GEMINI_MODEL = "gemini-2.5-flash"
+BACKGROUND_REMOVAL = "none"          # none | removebg
+TRYON_PROVIDER = "mock"              # mock | leffa
+LEFFA_SPACE = "franciszzj/Leffa"
+LEFFA_MODEL_TYPE = "viton_hd"
+LEFFA_STEPS = "30"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "outfit-db"
+database_id = "00000000-0000-0000-0000-000000000000"   # replace with `wrangler d1 create outfit-db`
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "WARDROBE"
+bucket_name = "outfit-wardrobe"
+
+[[r2_buckets]]
+binding = "BODY_PHOTOS"
+bucket_name = "outfit-body-photos"
+
+[[r2_buckets]]
+binding = "TRYON"
+bucket_name = "outfit-try-on"
+
+# Try-on jobs run on a queue (up to 15 min per message). Without the binding they run
+# in the request's background (waitUntil) — fine for local dev.
+[[queues.producers]]
+binding = "TRYON_QUEUE"
+queue = "outfit-tryon"
+
+[[queues.consumers]]
+queue = "outfit-tryon"
+max_batch_size = 1
+max_retries = 1
+
+[dev]
+port = 8000

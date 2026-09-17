@@ -1,0 +1,18 @@
+name = "outfit-web"
+main = ".open-next/worker.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat", "global_fetch_strictly_public"]
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+# Public env for the browser bundle + server actions. Secrets: none (Supabase publishable
+# key is public by design; the Worker API verifies the JWT).
+[vars]
+NEXT_PUBLIC_SUPABASE_URL = ""
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = ""
+NEXT_PUBLIC_API_URL = "https://outfit-api.<your-account>.workers.dev"
+NEXT_PUBLIC_SITE_URL = "https://outfit-web.<your-account>.workers.dev"
+
+# Local preview (`npm run preview:cf`) reads .dev.vars for overrides; see .dev.vars.example.
